@@ -55,7 +55,8 @@ typedef struct instruction_s
 } instruction_t;
 
 /* Wrapper */
-void process(void (*f)(stack_t **stack, unsigned int line_number), int val);
+typedef void (*op_handler)(stack_t **stack, unsigned int line_number);
+void process(op_handler handler, unsigned int linenum, int val);
 
 /* Errors */
 void check_argument_error(int argc);

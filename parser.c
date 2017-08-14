@@ -38,7 +38,7 @@ void find_code(instruction_t code, char *token, unsigned int linenum)
 	{
 		operand = strtok(NULL, " ");
 		if (_isdigit(operand))
-			process(codes[i].f, atoi(operand));
+			process(codes[i].f, linenum, atoi(operand));
 		else
 			execute_push_error(linenum);
 	}
