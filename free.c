@@ -7,5 +7,7 @@
  */
 void free_list(void)
 {
-
+	free_cells(tracker.head);
+	tracker.head = NULL;
+	tracker.node_count = 0;
 }

@@ -7,7 +7,11 @@
  */
 void init_tracker(void)
 {
-	tracker_t tracker = { NULL, 0, 's' };
+	stack_t *head;
 
-	tracker = tracker;
+	head = NULL;
+	tracker.head = head;
+	tracker.node_count = 0;
+	tracker.mode = 's';
+	tracker.buffer = NULL;
 }

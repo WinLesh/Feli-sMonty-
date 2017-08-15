@@ -36,6 +36,7 @@ typedef struct stack_tracker
 	stack_t *head;
 	size_t node_count;
 	char mode;
+	char *buffer;
 } tracker_t;
 
 extern tracker_t tracker;
@@ -54,14 +55,12 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* Dummy */
-void dummy_handler(stack_t **stack, unsigned int line_number);
+/* Nothing */
 void do_nothing(stack_t **stack, unsigned int line_number);
 
 /* Errors */
 void check_argument_error(int argc);
 void execute_file_read_error(char *filename);
-void execute_push_error(unsigned int linenum);
 void execute_invalid_opcode_error(unsigned int linenum, char *opcode);
 
 /* Initialization */
@@ -70,9 +69,19 @@ void init_tracker();
 /* Free */
 void free_list();
 
+/* Helpers */
+char *_isdigit(char *operand);
+stack_t *traverse_to_tail(stack_t *head);
+void print_head_cell(stack_t *head);
+
+/* Wrappers */
+void add_cell(stack_t **head, int value);
+
 /* Linked List implementation */
 stack_t *create_cell(int n, stack_t *prev, stack_t *next);
-stack_t *add_cell(stack_t **head, const int n);
+stack_t *add_cell_to_start(stack_t **head, const int n);
+stack_t *add_cell_to_end(stack_t **head, int n);
+size_t print_cells(stack_t *h);
 void free_cells(stack_t *head);
 
 /* Parser */
@@ -92,7 +101,7 @@ void mul_two_nodes(stack_t **stack, unsigned int line_number);
 void mod_two_nodes(stack_t **stack, unsigned int line_number);
 
 /* Mutate */
-void push_node(stack_t **stack, unsigned int line_number, int val);
+void push_node(stack_t **stack, unsigned int line_number);
 void pop_node(stack_t **stack, unsigned int line_number);
 void swap_two_nodes(stack_t **stack, unsigned int line_number);
 void rotate_top_to_bottom(stack_t **stack, unsigned int line_number);

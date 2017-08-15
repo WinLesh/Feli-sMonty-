@@ -8,11 +8,22 @@
  *
  * Return: None
  */
-void push_node(stack_t **stack, unsigned int line_number, int val)
+void push_node(stack_t **stack, unsigned int line_number)
 {
-	stack = stack;
-	line_number = line_number;
-	val = val;
+	char *operand = NULL;
+	int value = 0;
+
+	operand = strtok(NULL, " \t\r\n");
+	if (_isdigit(operand))
+	{
+		value = atoi(operand);
+		add_cell(stack, value);
+	}
+	else
+	{
+		printf("L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 }
 
 /**
