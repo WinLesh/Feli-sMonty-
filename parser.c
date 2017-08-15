@@ -6,7 +6,7 @@
  *
  * Return: 1 if true, 0 if false
  */
-int _isdigit(char *operand)
+char *_isdigit(char *operand)
 {
 	char c;
 	size_t i = 0;
@@ -16,10 +16,30 @@ int _isdigit(char *operand)
 	for (; operand[i]; i++)
 	{
 		c = operand[i];
+		if (c == '\n')
+		{
+			c = '\0';
+			break;
+		}
 		if ((c < '0') || (c > '9'))
-			return (0);
+			return (NULL);
 	}
-	return (1);
+	return (operand);
+}
+
+/**
+ * strip_newline - Strips the newline
+ * @token: The token
+ *
+ * Return: None
+ */
+void strip_newline(char *token)
+{
+	size_t i = 0;
+
+	for (; token[i] != '\n'; i++)
+		;
+	token[i] = '\0';
 }
 
 /**
@@ -30,34 +50,12 @@ int _isdigit(char *operand)
  *
  * Return: None
  */
-void find_code(instruction_t code, char *token, unsigned int linenum)
+void find_code(char *token, unsigned int linenum)
 {
 	char *operand = NULL;
 	tracker_t tracker;
-
-	if (!strcmp(token, "push"))
-	{
-		operand = strtok(NULL, " ");
-		printf("find_code %s\n", operand);
-		if (_isdigit(operand))
-			push_node(&(tracker.head), linenum, atoi(operand));
-		else
-			execute_push_error(linenum);
-	}
-	else if (!strcmp(token, code.opcode))
-		code.f(&(tracker.head), linenum);
-	else
-		execute_invalid_opcode_error(linenum, token);
-}
-
-/**
- * parse_file - Parses the file
- * @monty_file: Pointer to the file stream
- *
- * Return: None
- */
-void parse_file(FILE *monty_file)
-{
+	int oper_int = 0;
+	size_t i = 0;
 	instruction_t codes[] = {
 		{"push", dummy_handler},
 		{"pall", print_all},
@@ -78,27 +76,55 @@ void parse_file(FILE *monty_file)
 		{"queue", enable_queue_mode},
 		{NULL, NULL}
 	};
+
+	strip_newline(token);
+	while (codes[i].opcode)
+	{
+		if (!strcmp(token, "push"))
+		{
+			operand = strtok(NULL, " ");
+			printf("find_code %s\n", operand);
+			if (_isdigit(operand))
+			{
+				oper_int = atoi(operand);
+				push_node(&(tracker.head), linenum, oper_int);
+				return;
+			}
+			else
+				execute_push_error(linenum);
+		}
+		else if (!strcmp(token, codes[i].opcode))
+		{
+			codes[i].f(&(tracker.head), linenum);
+			return;
+		}
+		i++;
+	}
+	execute_invalid_opcode_error(linenum, token);
+}
+
+/**
+ * parse_file - Parses the file
+ * @monty_file: Pointer to the file stream
+ *
+ * Return: None
+ */
+void parse_file(FILE *monty_file)
+{
 	char *buffer = NULL;
 	size_t buffer_size = 0;
-	size_t i = 0;
 	unsigned int linenum = 0;
 	ssize_t chars_read = 0;
 	char *token = NULL;
 
-	chars_read = getline(&buffer, &buffer_size, monty_file);
-	printf("chars_read: %i\n", (int)chars_read);
-	while (chars_read != -1)
+	while ((chars_read = getline(&buffer, &buffer_size, monty_file)) != -1)
 	{
 		linenum++;
 		token = strtok(buffer, " ");
 		printf("parse_file %s\n", token);
 		if ((!strncmp(token, "#", 1)) || (chars_read == 0))
 			continue;
-		while (codes[i].opcode)
-		{
-			find_code(codes[i], token, linenum);
-			i++;
-		}
-		chars_read = getline(&buffer, buffer_size, monty_file);
+		find_code(token, linenum);
 	}
+	free(buffer);
 }
