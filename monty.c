@@ -1,5 +1,12 @@
 #include "monty.h"
 
+/**
+ * main - Entry Point
+ * @argc: Number of arguments
+ * @argv: The arguments
+ *
+ * Return: 0
+ */
 int main(int argc, char **argv)
 {
 	FILE *bytecode_file = NULL;

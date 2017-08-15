@@ -44,7 +44,6 @@ void strip_newline(char *token)
 
 /**
  * find_code - Tries to find the correct opcode and does respective action
- * @code: The instruction struct
  * @token: The current token
  * @linenum: The current line number
  *
@@ -57,24 +56,15 @@ void find_code(char *token, unsigned int linenum)
 	int oper_int = 0;
 	size_t i = 0;
 	instruction_t codes[] = {
-		{"push", dummy_handler},
-		{"pall", print_all},
-		{"pint", print_top},
-		{"pop", pop_node},
-		{"swap", swap_two_nodes},
-		{"add", add_two_nodes},
-		{"nop", do_nothing},
-		{"sub", sub_two_nodes},
-		{"div", div_two_nodes},
-		{"mul", mul_two_nodes},
-		{"mod", mod_two_nodes},
-		{"pchr", print_top_char},
-		{"pstr", print_string},
-		{"rotl", rotate_top_to_bottom},
-		{"rotr", rotate_bottom_to_top},
-		{"stack", enable_stack_mode},
-		{"queue", enable_queue_mode},
-		{NULL, NULL}
+		{"push", dummy_handler}, {"pall", print_all},
+		{"pint", print_top}, {"pop", pop_node},
+		{"swap", swap_two_nodes}, {"add", add_two_nodes},
+		{"nop", do_nothing}, {"sub", sub_two_nodes},
+		{"div", div_two_nodes}, {"mul", mul_two_nodes},
+		{"mod", mod_two_nodes}, {"pchr", print_top_char},
+		{"pstr", print_string}, {"rotl", rotate_top_to_bottom},
+		{"rotr", rotate_bottom_to_top}, {"stack", enable_stack_mode},
+		{"queue", enable_queue_mode}, {NULL, NULL}
 	};
 
 	strip_newline(token);
@@ -83,7 +73,6 @@ void find_code(char *token, unsigned int linenum)
 		if (!strcmp(token, "push"))
 		{
 			operand = strtok(NULL, " ");
-			printf("find_code %s\n", operand);
 			if (_isdigit(operand))
 			{
 				oper_int = atoi(operand);
@@ -121,7 +110,6 @@ void parse_file(FILE *monty_file)
 	{
 		linenum++;
 		token = strtok(buffer, " ");
-		printf("parse_file %s\n", token);
 		if ((!strncmp(token, "#", 1)) || (chars_read == 0))
 			continue;
 		find_code(token, linenum);

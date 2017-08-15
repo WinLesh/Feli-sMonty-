@@ -5,7 +5,7 @@
  *
  * Return: None
  */
-void init_tracker()
+void init_tracker(void)
 {
 	tracker_t tracker = { NULL, 0, 's' };
 

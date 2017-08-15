@@ -5,7 +5,7 @@
  *
  * Return: None
  */
-void free_list()
+void free_list(void)
 {
 
 }
