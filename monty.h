@@ -70,6 +70,11 @@ void init_tracker();
 /* Free */
 void free_list();
 
+/* Linked List implementation */
+stack_t *create_cell(int n, stack_t *prev, stack_t *next);
+stack_t *add_cell(stack_t **head, const int n);
+void free_cells(stack_t *head);
+
 /* Parser */
 void parse_file(FILE *monty_file);
 

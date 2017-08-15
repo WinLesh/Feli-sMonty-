@@ -8,7 +8,7 @@
  *
  * Return: The address of the node or NULL
  */
-dlistint_t *create_cell(int n, stack_t *prev, stack_t *next)
+stack_t *create_cell(int n, stack_t *prev, stack_t *next)
 {
 	stack_t *node;
 
@@ -29,13 +29,13 @@ dlistint_t *create_cell(int n, stack_t *prev, stack_t *next)
  *
  * Return: Address of the new head
  */
-dlistint_t *add_cell(stack_t **head, const int n)
+stack_t *add_cell(stack_t **head, const int n)
 {
 	stack_t *new_node = NULL, *current_head = NULL;
 
 	if (head == NULL)
 		return (NULL);
-	new_node = create_node(n, NULL, NULL);
+	new_node = create_cell(n, NULL, NULL);
 	if (new_node == NULL)
 		return (NULL);
 	if (*head == NULL)

@@ -38,6 +38,7 @@ void find_code(instruction_t code, char *token, unsigned int linenum)
 	if (!strcmp(token, "push"))
 	{
 		operand = strtok(NULL, " ");
+		printf("find_code %s\n", operand);
 		if (_isdigit(operand))
 			push_node(&(tracker.head), linenum, atoi(operand));
 		else
@@ -78,16 +79,19 @@ void parse_file(FILE *monty_file)
 		{NULL, NULL}
 	};
 	char *buffer = NULL;
-	size_t *buffer_size = NULL;
+	size_t buffer_size = 0;
 	size_t i = 0;
 	unsigned int linenum = 0;
 	ssize_t chars_read = 0;
 	char *token = NULL;
 
-	while ((chars_read = getline(&buffer, buffer_size, monty_file)) != -1)
+	chars_read = getline(&buffer, &buffer_size, monty_file);
+	printf("chars_read: %i\n", (int)chars_read);
+	while (chars_read != -1)
 	{
 		linenum++;
 		token = strtok(buffer, " ");
+		printf("parse_file %s\n", token);
 		if ((!strncmp(token, "#", 1)) || (chars_read == 0))
 			continue;
 		while (codes[i].opcode)
@@ -95,5 +99,6 @@ void parse_file(FILE *monty_file)
 			find_code(codes[i], token, linenum);
 			i++;
 		}
+		chars_read = getline(&buffer, buffer_size, monty_file);
 	}
 }
