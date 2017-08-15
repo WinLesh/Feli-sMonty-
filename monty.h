@@ -54,21 +54,46 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/* Wrapper */
-typedef void (*op_handler)(stack_t **stack, unsigned int line_number);
-void process(op_handler handler, unsigned int linenum, int val);
+/* Dummy */
+void dummy_handler(stack_t **stack, unsigned int line_number);
+void do_nothing(stack_t **stack, unsigned int line_number);
 
 /* Errors */
 void check_argument_error(int argc);
 void execute_file_read_error(char *filename);
 void execute_push_error(unsigned int linenum);
-void execute_invalid_opcode_error(unsigned int linenum);
+void execute_invalid_opcode_error(unsigned int linenum, char *opcode);
 
 /* Initialization */
 void init_tracker();
-instruction_t **init_instructions();
+
+/* Free */
+void free_list();
 
 /* Parser */
 void parse_file(FILE *monty_file);
 
+/* Print */
+void print_all(stack_t **stack, unsigned int line_number);
+void print_top(stack_t **stack, unsigned int line_number);
+void print_top_char(stack_t **stack, unsigned int line_number);
+void print_string(stack_t **stack, unsigned int line_number);
+
+/* Calculator */
+void add_two_nodes(stack_t **stack, unsigned int line_number);
+void sub_two_nodes(stack_t **stack, unsigned int line_number);
+void div_two_nodes(stack_t **stack, unsigned int line_number);
+void mul_two_nodes(stack_t **stack, unsigned int line_number);
+void mod_two_nodes(stack_t **stack, unsigned int line_number);
+
+/* Mutate */
+void push_node(stack_t **stack, unsigned int line_number, int val);
+void pop_node(stack_t **stack, unsigned int line_number);
+void swap_two_nodes(stack_t **stack, unsigned int line_number);
+void rotate_top_to_bottom(stack_t **stack, unsigned int line_number);
+void rotate_bottom_to_top(stack_t **stack, unsigned int line_number);
+
+/* Mode */
+void enable_stack_mode(stack_t **stack, unsigned int line_number);
+void enable_queue_mode(stack_t **stack, unsigned int line_number);
 #endif

@@ -1,26 +1,26 @@
 #include "monty.h"
 
 /**
- * enable_stack_mode - turn list into a stack
+ * do_nothing - Self-explanatory
  * @stack: Address of the head pointer
  * @line_number: The current line number
  *
  * Return: None
  */
-void enable_stack_mode(stack_t **stack, unsigned int line_number)
+void do_nothing(stack_t **stack, unsigned int line_number)
 {
 	stack = stack;
 	line_number = line_number;
 }
 
 /**
- * enable_queue_mode - turn list into a queue
+ * dummy_handler - Push has different prototype, hence dummy handler
  * @stack: Address of the head pointer
  * @line_number: The current line number
  *
  * Return: None
  */
-void enable_queue_mode(stack_t **stack, unsigned int line_number)
+void dummy_handler(stack_t **stack, unsigned int line_number)
 {
 	stack = stack;
 	line_number = line_number;

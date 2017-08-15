@@ -33,19 +33,20 @@ int _isdigit(char *operand)
 void find_code(instruction_t code, char *token, unsigned int linenum)
 {
 	char *operand = NULL;
+	tracker_t tracker;
 
 	if (!strcmp(token, "push"))
 	{
 		operand = strtok(NULL, " ");
 		if (_isdigit(operand))
-			process(codes[i].f, linenum, atoi(operand));
+			push_node(&(tracker.head), linenum, atoi(operand));
 		else
 			execute_push_error(linenum);
 	}
 	else if (!strcmp(token, code.opcode))
 		code.f(&(tracker.head), linenum);
 	else
-		execute_invalid_opcode_error(linenum);
+		execute_invalid_opcode_error(linenum, token);
 }
 
 /**
@@ -56,7 +57,26 @@ void find_code(instruction_t code, char *token, unsigned int linenum)
  */
 void parse_file(FILE *monty_file)
 {
-	instruction_t **codes = init_instructions();
+	instruction_t codes[] = {
+		{"push", dummy_handler},
+		{"pall", print_all},
+		{"pint", print_top},
+		{"pop", pop_node},
+		{"swap", swap_two_nodes},
+		{"add", add_two_nodes},
+		{"nop", do_nothing},
+		{"sub", sub_two_nodes},
+		{"div", div_two_nodes},
+		{"mul", mul_two_nodes},
+		{"mod", mod_two_nodes},
+		{"pchr", print_top_char},
+		{"pstr", print_string},
+		{"rotl", rotate_top_to_bottom},
+		{"rotr", rotate_bottom_to_top},
+		{"stack", enable_stack_mode},
+		{"queue", enable_queue_mode},
+		{NULL, NULL}
+	};
 	char *buffer = NULL;
 	size_t *buffer_size = NULL;
 	size_t i = 0;
@@ -64,9 +84,9 @@ void parse_file(FILE *monty_file)
 	ssize_t chars_read = 0;
 	char *token = NULL;
 
-	while ((chars_read = getline(&buffer, &buffer_size, monty_file)) != -1)
+	while ((chars_read = getline(&buffer, buffer_size, monty_file)) != -1)
 	{
-		num_lines++;
+		linenum++;
 		token = strtok(buffer, " ");
 		if ((!strncmp(token, "#", 1)) || (chars_read == 0))
 			continue;
