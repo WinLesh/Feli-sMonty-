@@ -67,7 +67,6 @@ void find_code(char *token, unsigned int linenum)
 		{"queue", enable_queue_mode}, {NULL, NULL}
 	};
 
-	strip_newline(token);
 	while (codes[i].opcode)
 	{
 		if (!strcmp(token, "push"))
@@ -109,8 +108,8 @@ void parse_file(FILE *monty_file)
 	while ((chars_read = getline(&buffer, &buffer_size, monty_file)) != -1)
 	{
 		linenum++;
-		token = strtok(buffer, " ");
-		if ((!strncmp(token, "#", 1)) || (chars_read == 0))
+		token = strtok(buffer, " \n\r\t");
+		if (!token || (!strncmp(token, "#", 1)) || (chars_read == 0))
 			continue;
 		find_code(token, linenum);
 	}
