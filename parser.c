@@ -61,7 +61,7 @@ void find_code(char *token, unsigned int linenum)
 		{"swap", swap_two_nodes}, {"add", add_two_nodes},
 		{"nop", do_nothing}, {"sub", sub_two_nodes},
 		{"div", div_two_nodes}, {"mul", mul_two_nodes},
-		{"mod", mod_two_nodes}, {"pchr", print_top_char},
+		{"mod", mod_two_nodes}, {"pchar", print_top_char},
 		{"pstr", print_string}, {"rotl", rotate_top_to_bottom},
 		{"rotr", rotate_bottom_to_top}, {"stack", enable_stack_mode},
 		{"queue", enable_queue_mode}, {NULL, NULL}
