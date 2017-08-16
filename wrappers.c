@@ -2,7 +2,7 @@
 
 /**
  * add_cell - Creates a node and adds onto stack
- * @stack: The address of the head pointer
+ * @head: The address of the head pointer
  * @value: The value to instantiate node with
  *
  * Return: None
