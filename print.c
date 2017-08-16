@@ -53,7 +53,20 @@ void print_top_char(stack_t **stack, unsigned int line_number)
  */
 void print_string(stack_t **stack, unsigned int line_number)
 {
-	printf("print_string:\n");
-	stack = stack;
+	size_t i;
+	stack_t *current;
+
 	line_number = line_number;
+	current = *stack;
+	for (i = 0; current; i++)
+	{
+		if ((current->n < 1) || (current->n > 127))
+		{
+			putchar('\n');
+			return;
+		}
+		putchar(current->n);
+		current = current->next;
+	}
+	putchar('\n');
 }
