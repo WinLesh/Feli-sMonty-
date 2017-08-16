@@ -9,8 +9,23 @@
  */
 void add_two_nodes(stack_t **stack, unsigned int line_number)
 {
-	stack = stack;
-	line_number = line_number;
+	stack_t *current_head = NULL, *next = NULL;
+	int first = 0, second = 0, sum = 0;
+
+	if (tracker.node_count < 2)
+	{
+		printf("L%u: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	current_head = *stack;
+	next = current_head->next;
+
+	first = current_head->n;
+	second = next->n;
+	sum = first + second;
+
+	pop_node(stack, line_number);
+	next->n = sum;
 }
 
 /**

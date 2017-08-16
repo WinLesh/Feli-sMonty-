@@ -56,4 +56,5 @@ void parse_file(FILE *monty_file)
 		find_code(token, linenum);
 	}
 	free(tracker.buffer);
+	tracker.buffer = NULL;
 }

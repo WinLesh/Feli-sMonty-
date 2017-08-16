@@ -2,11 +2,19 @@
 
 tracker_t tracker;
 
+/**
+ * cleanup - Cleanup, cleanup
+ *
+ * Return: None
+ */
 void cleanup(void)
 {
-	free_list();
-	free(tracker.buffer);
-	fclose(tracker.file);
+	if (tracker.node_count > 0)
+		free_list();
+	if (tracker.buffer)
+		free(tracker.buffer);
+	if (tracker.file)
+		fclose(tracker.file);
 }
 
 /**
@@ -27,7 +35,5 @@ int main(int argc, char **argv)
 	atexit(cleanup);
 	init_tracker(bytecode_file);
 	parse_file(bytecode_file);
-	free_list();
-	fclose(bytecode_file);
 	return (0);
 }
