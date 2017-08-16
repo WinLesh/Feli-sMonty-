@@ -37,6 +37,7 @@ typedef struct stack_tracker
 	size_t node_count;
 	char mode;
 	char *buffer;
+	FILE *file;
 } tracker_t;
 
 extern tracker_t tracker;
@@ -64,7 +65,7 @@ void execute_file_read_error(char *filename);
 void execute_invalid_opcode_error(unsigned int linenum, char *opcode);
 
 /* Initialization */
-void init_tracker();
+void init_tracker(FILE *file);
 
 /* Free */
 void free_list();
