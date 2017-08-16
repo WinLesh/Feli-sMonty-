@@ -9,6 +9,7 @@
  */
 void enable_stack_mode(stack_t **stack, unsigned int line_number)
 {
+	tracker.mode = 's';
 	stack = stack;
 	line_number = line_number;
 }
@@ -22,6 +23,7 @@ void enable_stack_mode(stack_t **stack, unsigned int line_number)
  */
 void enable_queue_mode(stack_t **stack, unsigned int line_number)
 {
+	tracker.mode = 'q';
 	stack = stack;
 	line_number = line_number;
 }
