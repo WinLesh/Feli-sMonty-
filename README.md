@@ -34,9 +34,10 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 If you as a developer would like to fork our current project and create your own domain-specific monty, please give us a shout-out.
 
 ## Usage
+```sh
 ./monty [./myFile.m]
-
-where [./myFile.m] contains the direct path to the file containing the Monty bytecode instructions. Each file lists one instruction per line maximum. Each line is read individually and evaluated. The file can contain blank lines (empty or made of spaces only. Any additional text after the opcode or its required argument is not taken into account. If there are comments, denoted by a "#" is ignored as well.
+```
+where `[./myFile.m]` contains the direct path to the file containing the Monty bytecode instructions. Each file lists one instruction per line maximum. Each line is read individually and evaluated. The file can contain blank lines (empty or made of spaces only. Any additional text after the opcode or its required argument is not taken into account. If there are comments, denoted by a "#" is ignored as well.
 
 If the Monty file contains an error, where the program cannot run or process it, the program will print an error message and exit with EXIT_FAILURE.
 
