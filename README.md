@@ -1,6 +1,6 @@
 # Monty
 
-<img src="https://media.giphy.com/media/usCPmkFoSWcZW/giphy.gif" style="height:15%;width:15%" />
+<img src="https://github.com/srinitude/monty/blob/master/monty.png" style="height:15%;width:15%" />
 
 ## Welcome
 Thanks for visiting our project, Monty. It is entirely written in C and any reference to Python is purely accidental. Monty is a simple calculator implementing Addition, Subtraction, Multiplication, Division, and Modulo operations with simple bytecodes in a *.m file. This use of a stack (with limited features of a queue) is a basic Reverse Polish Notation calculator.
