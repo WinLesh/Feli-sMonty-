@@ -39,9 +39,23 @@ void print_top(stack_t **stack, unsigned int line_number)
  */
 void print_top_char(stack_t **stack, unsigned int line_number)
 {
-	printf("print_top_char:\n");
-	stack = stack;
-	line_number = line_number;
+	stack_t *current_head = NULL;
+	int value = 0;
+
+	if (tracker.node_count == 0)
+	{
+		printf("L%u: can't pchar, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	current_head = *stack;
+	value = current_head->n;
+	if (value < 0 || value > 127)
+	{
+		printf("L%u: can't pchar, value out of range\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	putchar(value);
+	putchar('\n');
 }
 
 /**
