@@ -92,8 +92,27 @@ void swap_two_nodes(stack_t **stack, unsigned int line_number)
  */
 void rotate_top_to_bottom(stack_t **stack, unsigned int line_number)
 {
-	stack = stack;
+	stack_t *current = NULL;
+	size_t i = 0;
+	int temp = 0;
+
 	line_number = line_number;
+	if (tracker.node_count < 2)
+		return;
+	current = *stack;
+	temp = current->n;
+
+	for (; current; i++)
+	{
+		if (current->next == NULL)
+		{
+			current->n = temp;
+			return;
+		}
+		else
+			current->n = (current->next)->n;
+		current = current->next;
+	}
 }
 
 /**

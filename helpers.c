@@ -37,6 +37,8 @@ stack_t *traverse_to_tail(stack_t *head)
 {
 	size_t i;
 
+	if (head == NULL)
+		return (NULL);
 	for (i = 0; head->next; i++)
 	{
 		if (head->next)
