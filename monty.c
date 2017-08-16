@@ -2,6 +2,13 @@
 
 tracker_t tracker;
 
+void cleanup(void)
+{
+	free_list();
+	free(tracker.buffer);
+	fclose(tracker.file);
+}
+
 /**
  * main - Entry Point
  * @argc: Number of arguments
@@ -17,7 +24,8 @@ int main(int argc, char **argv)
 	bytecode_file = fopen(argv[1], "r");
 	if (!bytecode_file)
 		execute_file_read_error(argv[1]);
-	init_tracker();
+	atexit(cleanup);
+	init_tracker(bytecode_file);
 	parse_file(bytecode_file);
 	free_list();
 	fclose(bytecode_file);
