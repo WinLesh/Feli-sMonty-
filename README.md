@@ -3,7 +3,7 @@
 <img src="https://media.giphy.com/media/usCPmkFoSWcZW/giphy.gif" style="height:15%;width:15%" />
 
 ## Welcome
-Thanks for visiting our project, Monty is entirely written in C and any reference to Python is purely accidental. Monty is a simple calculator implementing Addition, Subtraction, Multiplication, Division, and Modulo operations using Monty bytecode in a file. The use of a stack (with limited features of a queue) means this is a Reverse Polish Notation calculator.
+Thanks for visiting our project, Monty. It is entirely written in C and any reference to Python is purely accidental. Monty is a simple calculator implementing Addition, Subtraction, Multiplication, Division, and Modulo operations with simple bytecodes in a *.m file. This use of a stack (with limited features of a queue) is a basic Reverse Polish Notation calculator.
 
 The code uses only one global variable (extern) and is highly modular. Expansion of this calculator to include more bytecode instructions or scientific functions would be fairly easy.
 
@@ -11,7 +11,7 @@ The code uses only one global variable (extern) and is highly modular. Expansion
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Bytecode Instructions](bytecodeinstructions)
+* [Bytecode Instructions](#bytecode-instructions)
 * [Credits](#credits)
 * [License](#license)
 
@@ -34,11 +34,12 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 If you as a developer would like to fork our current project and create your own domain-specific monty, please give us a shout-out.
 
 ## Usage
+```sh
 ./monty [./myFile.m]
+```
+where `[./myFile.m]` contains the direct path to the file containing the Monty bytecode instructions. Each file lists one instruction per line maximum. Each line is read individually and evaluated. The file can contain blank lines (empty or made of spaces only. Any additional text after the opcode or its required argument is not taken into account. If there are comments, denoted by a "#" is ignored as well.
 
-where [./myFile.m] contains the direct path to the file containing the Monty bytecode instructions. Each file lists one instruction per line maximum. Each line is read individually and evaluated. The file can contain blank lines (empty or made of spaces only. Any additional text after the opcode or its required argument is not taken into account. If there are comments, denoted by a "#" is ignored as well.
-
-If the Monty file contains an error, where the program cannot run or process it, the program will print an error message and exit with EXIT_FAILURE
+If the Monty file contains an error, where the program cannot run or process it, the program will print an error message and exit with EXIT_FAILURE.
 
 To start Monty at your shell prompt, type:
 ```sh
@@ -51,12 +52,24 @@ push 1
 push 2
   push 3
                    pall
+add
+pall
+push 110
+push 111
+push 116
+push 114
+push 101
+push 98
+push 108
+push 111
+push 72
+pstr
+
 ```
 
 ## Bytecode Instructions
 The commands that you can use with Monty
 
-* Standard
 | Category    | Instruction    | Description                            |
 |-------------|----------------|----------------------------------------|
 | Enter Data  | push (operand) | Push operand onto stack/queue          |
@@ -78,7 +91,7 @@ The commands that you can use with Monty
 |             | pchar          | print element as a character           |
 |             | pstr           | print elements as a string             |
 
-* We do check for division by zero in the div and mod functions
+We do check for division by zero in the div and mod functions
 
 ## Credits
 Monty is owned and maintained by Kiren Srinivasan ([@srinitude](https://twitter.com/srinitude)) and Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)). You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project and our forked projects.
