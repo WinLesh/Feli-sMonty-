@@ -124,6 +124,27 @@ void rotate_top_to_bottom(stack_t **stack, unsigned int line_number)
  */
 void rotate_bottom_to_top(stack_t **stack, unsigned int line_number)
 {
-	stack = stack;
+	stack_t *current = NULL;
+	size_t i = 0;
+	int tail_temp = 0;
+
 	line_number = line_number;
+
+	if (tracker.node_count < 2)
+		return;
+	current = *stack;
+	current = traverse_to_tail(current);
+	tail_temp = current->n;
+
+	for (; current; i++)
+	{
+		if (current->prev == NULL)
+		{
+			current->n = tail_temp;
+			return;
+		}
+		else
+			current->n = (current->prev)->n;
+		current = current->prev;
+	}
 }
