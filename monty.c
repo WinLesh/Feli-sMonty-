@@ -1,5 +1,7 @@
 #include "monty.h"
 
+tracker_t tracker;
+
 /**
  * main - Entry Point
  * @argc: Number of arguments

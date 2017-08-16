@@ -28,18 +28,6 @@ void execute_file_read_error(char *filename)
 }
 
 /**
- * execute_push_error - Error if push gets bad operand
- * @linenum: The line number where push opcode shows up
- *
- * Return: None
- */
-void execute_push_error(unsigned int linenum)
-{
-	printf("L%u: usage: push integer\n", linenum);
-	exit(EXIT_FAILURE);
-}
-
-/**
  * execute_invalid_opcode_error - Error if we get bad opcode
  * @linenum: The line number where push opcode shows up
  * @opcode: The invalid opcode

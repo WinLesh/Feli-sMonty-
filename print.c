@@ -9,8 +9,7 @@
  */
 void print_all(stack_t **stack, unsigned int line_number)
 {
-	printf("print_all:\n");
-	stack = stack;
+	print_cells(*stack);
 	line_number = line_number;
 }
 
@@ -23,9 +22,12 @@ void print_all(stack_t **stack, unsigned int line_number)
  */
 void print_top(stack_t **stack, unsigned int line_number)
 {
-	printf("print_top:\n");
-	stack = stack;
-	line_number = line_number;
+	if (tracker.node_count == 0)
+	{
+		printf("L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	print_head_cell(*stack);
 }
 
 /**
