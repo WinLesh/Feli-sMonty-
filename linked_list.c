@@ -14,7 +14,10 @@ stack_t *create_cell(int n, stack_t *prev, stack_t *next)
 
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
-		return (NULL);
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	node->n = n;
 	node->prev = prev;
 	node->next = next;
