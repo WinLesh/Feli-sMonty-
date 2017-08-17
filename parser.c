@@ -50,7 +50,7 @@ void parse_file(FILE *monty_file)
 	while ((n_chars = getline(&(tracker.buffer), &n_buf, monty_file)) != -1)
 	{
 		linenum++;
-		token = strtok(tracker.buffer, " \n\r\t");
+		token = strtok(tracker.buffer, "\n \r\t");
 		if (!token || (!strncmp(token, "#", 1)) || (n_chars == 0))
 			continue;
 		find_code(token, linenum);
