@@ -70,7 +70,7 @@ void mul_two_nodes(stack_t **stack, unsigned int line_number)
 
 	if (tracker.node_count < 2)
 	{
-		printf("L%u: can't add, stack too short\n", line_number);
+		printf("L%u: can't mul, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	current_head = *stack;
@@ -98,7 +98,7 @@ void div_two_nodes(stack_t **stack, unsigned int line_number)
 
 	if (tracker.node_count < 2)
 	{
-		printf("L%u: can't sub, stack too short\n", line_number);
+		printf("L%u: can't div, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	current_head = *stack;
@@ -131,7 +131,7 @@ void mod_two_nodes(stack_t **stack, unsigned int line_number)
 
 	if (tracker.node_count < 2)
 	{
-		printf("L%u: can't sub, stack too short\n", line_number);
+		printf("L%u: can't mod, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	current_head = *stack;
