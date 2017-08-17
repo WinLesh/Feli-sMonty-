@@ -13,10 +13,18 @@ void push_node(stack_t **stack, unsigned int line_number)
 	int value = 0;
 
 	operand = strtok(NULL, " \t\r\n");
-	if (_isdigit(operand))
+	if (operand != NULL)
 	{
-		value = atoi(operand);
-		add_cell(stack, value);
+		if (_isdigit(operand))
+		{
+			value = atoi(operand);
+			add_cell(stack, value);
+		}
+		else
+		{
+			printf("L%u: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
